@@ -52,7 +52,22 @@ a {
   display: flex;
   flex-direction: column;
 }
+section, header {
+  animation: show linear;
+  animation-timeline: view();
+  animation-range: entry 0% cover 40%;
+}
+@keyframes show {
+  from {
+    opacity: 0;
+    scale: 0.95;
+  }
+  to {
+    opacity: 1;
 
+    scale: 1;
+  }
+}
 header {
   position: relative;
   height: 100vh;
@@ -104,50 +119,25 @@ nav .box {
 .sidebar {
   position: fixed;
   top: 0;
-  right: -100%;
+  left: 0; /* Moved to the left side */
+  transform: translateX(-100%); /* Hidden by default */
   height: 100%;
-  width: 50%;
-  background-color: #222;
+  width: 250px;
+  background-color: #111;
   padding: 2rem 1rem;
-  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.5);
-  transition: right 0.3s ease;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease;
   z-index: 999;
   display: flex;
   flex-direction: column;
 }
 
-/* Show sidebar when active class is added */
+/* When sidebar is active (visible) */
 .sidebar.active {
-  right: 0;
+  transform: translateX(0);
 }
 
-/* Sidebar nav links */
-.sidebar .navlinks {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  list-style: none;
-  padding: 0;
-  margin-top: 3rem;
-}
-
-.sidebar .navlinks a {
-  color: white;
-  text-decoration: none;
-  font-size: 1.1rem;
-}
-
-/* Close button (X icon) */
-.close-btn {
-  font-size: 2rem;
-  color: white;
-  cursor: pointer;
-  position: absolute;
-  top: 10px;
-  right: 15px;
-}
-
-/* Dim background overlay, hidden by default */
+/* Overlay to dim background */
 .overlay {
   position: fixed;
   top: 0;
@@ -165,7 +155,20 @@ nav .box {
   opacity: 1;
   visibility: visible;
 }
+.sidebar .navlinks {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  list-style: none;
+  padding: 0;
+  margin-top: 3rem;
+}
 
+.sidebar .navlinks a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.1rem;
+}
 
 
 /* The lower section of the header. */
@@ -376,7 +379,9 @@ nav .box {
   width: 96%;
   height: 10%;
   text-align: center;
-  background-color: #25a0b1;
+  background: linear-gradient(#25a0b1, #1d828f, #19727e);
+  border: 2px solid #fff;
+  border-radius: 5px;
   color: #fff;
   font-size: 0.7rem;
   margin-top: 10%;
@@ -521,7 +526,9 @@ nav .box {
   flex-direction: column;
   gap: 10px;
 }
-
+.dropdown-content p, .dropdown-content a {
+  font-size: 0.5rem;
+}
 /* The container for each fact */
 .stuff {
   width: 80%;
@@ -707,15 +714,18 @@ iframe {
 footer {
   display: flex;
   justify-content: center;
-  align-items: end;
+  align-items: center;
+  flex-direction: column;
   width: 100%;
-  height: 10vh;
-  background-color: #000;
+  height: 20vh;
+  background-color: #362f2f;
   color: #fff;
 }
-footer p {
-  text-align: center;
+footer p, footer a {
   font-size: 0.6rem;
+}
+.x-com {
+  display: inline-block;
 }
 /* Essay section. */ 
 /* The style properties for large screensizes (800px and above). */
@@ -1047,11 +1057,11 @@ footer p {
               <div class="sidebar">
                 <span class="close-btn">&times;</span>
                 <ul class="navlinks">
-                  <li><a href="#">Home</a></li>
-                  <li><a href="#">Songs</a></li>
-                  <li><a href="#">About</a></li>
-                  <li><a href="#">Others</a></li>
-                  <li><a href="#">Contact</a></li>
+                  <li><a href="#headerlower">Home</a></li>
+                  <li><a href="#sect-two">Songs</a></li>
+                  <li><a href="#about">About</a></li>
+                  <li><a href="#others">Others</a></li>
+                  <li><a href="#contact">Contact</a></li>
                 </ul>
               </div>
               
@@ -1060,24 +1070,24 @@ footer p {
       
               <!-- The navigation for the big screen size (800px and above). -->
                <ul class="navlinks">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Songs</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Others</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="#headerlower">Home</a></li>
+                <li><a href="#sect-two">Songs</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#others">Others</a></li>
+                <li><a href="#contact">Contact</a></li>
                </ul>
             </div>
           </div>
         </nav>
   
         <!-- The lower section of the header -->
-         <section class="header-sect">
+         <section id="headerlower" class="header-sect">
           <div class="box">
             <div class="textside">
               <h1 class="heading"><span class="trueword">TRUE</span> <span class="heading-span">AUTHENTIC</span></h1>
               <p class="subtext">Come along on an exciting journey of self realism, <br>dream beyond your imagination</p>
               <button> 
-                <span>START SLIDE</span> 
+                <a href="#others"><span>Start now</span></a> 
                 <div class="slideicon">
                   <img src="https://s3.amazonaws.com/shecodesio-production/uploads/files/000/163/307/original/arrow-right.png?1744843576" alt="">
                 </div>
@@ -1124,7 +1134,7 @@ footer p {
       </div> 
    
   </header>
-  <section class="section-two">
+  <section id="sect-two" class="section-two">
     <div class="box">
       <div class="music">
         <div class="box">
@@ -1210,7 +1220,7 @@ footer p {
             <div class="quote-box">
               <div class="exclamation">"</div>
               <p>
-                Presentations are tools that can be used as lectures, speeches, reports, and more. It is mostly presented before an audience.
+                You never know what you can do unless you try, just dig a little deeper. Things may seem tough but you'll finish stronger, don't ever let what people think of you to define you.
               </p>
             </div>
           </button>
@@ -1232,7 +1242,7 @@ footer p {
   </section>
   
 
-  <section class="about">
+  <section id="about" class="about">
 
     <div class="box">
       <div class="innerdiv">
@@ -1326,7 +1336,7 @@ footer p {
     </div>
   </section>
 
-  <section class="otherfaves">
+  <section id="others" class="otherfaves">
     <div class="favesheading">
       <div class="box">
         <br/>
@@ -1368,7 +1378,7 @@ footer p {
     </div>
   </section>
 
-  <section class="whatismusic">
+  <section id="contact" class="whatismusic">
     <div class="box">
       <div class="headingpart">
         <span class="browntext">EUPHORIC</span>
@@ -1397,6 +1407,7 @@ footer p {
     </div>
   </section>
   <footer>
+    <a href="https://x.com/i/communities/1911019850098417916">Check out this developer community on <div class="x-com"><img width="30" height="30" src="https://img.icons8.com/ios-filled/50/FFFFFF/twitterx.png" alt="twitterx"/></div></a>
     <p>&copy;2025 SheCodes project</p>
   </footer>
   <script>
